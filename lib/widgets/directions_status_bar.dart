@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+//import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_navigation_tuts_o/controllers/home_controller.dart';
 import 'package:google_maps_navigation_tuts_o/controllers/navigation_controller.dart';
@@ -50,14 +51,18 @@ class DirectionsStatusBar extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Html(data:"""<span>${directionModel.instructions}</span>""",
-                      style: {
-                        'span':Style(color: Colors.white)
-                      }
-                      )
+                      HtmlWidget(
+                        '<span>${directionModel.instructions}</span>',
+                        customStylesBuilder: (element) {
+                          if (element.localName == 'span') {
+                            return {'color': 'white'};
+                          }
+                          return null;
+                        },
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
